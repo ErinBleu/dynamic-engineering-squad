@@ -15,6 +15,11 @@ Refactoring the Future
 - [Erin Anderson](team/EAndersonResume.pdf)
 - [Sunair Iqbal](team/SIqbalResume.pdf)
 
+### Team Materials
+- [Logo](doc/DESlogo.png)
+- [Letterhead](doc/DES_Letterhead_Template.pdf)
+- [Business Card](doc/business_card.png)
+
 ## Installation
 
 TBD
