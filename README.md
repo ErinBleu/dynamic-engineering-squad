@@ -4,17 +4,13 @@ Refactoring the Future
 > A description of our app (when we come up with it)
 
 ## Table of Contents
-- [Team](#team)
-- [Project Ideas](#project-ideas)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Features](#features)
-
-## Team
-- [Julian Aguilar-Tomas](team/JulianResume.pdf)
-- [Phillip Alter](team/PAlterResume.pdf)
-- [Erin Anderson](team/EAndersonResume.pdf)
-- [Sunair Iqbal](team/SIqbalResume.pdf)
+- [Dynamic Engineering Squad](#dynamic-engineering-squad)
+  - [Table of Contents](#table-of-contents)
+    - [Team Materials](#team-materials)
+  - [Project Ideas](#project-ideas)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Features](#features)
 
 ### Team Materials
 - [Logo](doc/DESlogo.png)
@@ -23,7 +19,7 @@ Refactoring the Future
 
 ## Project Ideas
 
-Project ideas can be found in [team/ProjectIdeas](team/ProjectIdeas.pdf).
+Here are our [project ideas](doc/ProjectIdeas.pdf).
 
 ## Installation
 
