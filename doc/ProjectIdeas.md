@@ -90,3 +90,52 @@ An external AI - using **Google's Cloud Vision API** or similar - would assist b
 ### Optional Add-ons
 - Interative maps to drop and view pins using the Google Maps API
 - Automated email notifications using an email API when specific issues reach a high "upvote" threshold
+
+
+## Interactive Museum Quest
+
+### Problem
+Traditional museum tours are often fail to engage visitors, especially younger audiences or first-time visitors. Visitors miss exhibits that match their interests because they don’t know where to start or what to prioritize.
+
+### Solution
+In this application, users would:
+- Create an account
+- Search for and select a museum or exhibit
+- Participate in themed quests tied to exhibits (questions, challenges, scavenger-hunt style tasks)
+- Unlock content by completing tasks (answering questions, reaching exhibit checkpoints)
+- Track progress during a visit and across multiple visits
+
+
+An external AI—using **Google’s Gemini API** would assist by:
+- Generating exhibit-specific quest challenges and trivia questions
+- Providing adaptive hints and summaries based on user progress and exhibit themes
+
+
+### Optional Add-ons
+- QR code scanning at exhibits to verify location/checkpoints
+- Scoring, badges, and achievement systems
+- Payment integration for premium tours or special exhibits
+
+
+## Smart Pantry App
+
+### Problem
+In order to solve world hunger, we must start looking for food waste in our own home. Households waste a lot of food because they either don't know what to cook with the ingredients they have or they let the food expire and it goes to waste.
+
+### Solution
+In this application, users would:
+- Create an account
+- Upload images of their pantry, manually enter their pantry items, or scan the barcode of the products they have.
+- Maintain a digital pantry inventory
+- Be able to see if any dietary restriction are met/violated
+- Create and save custom recipes
+
+An external AI - using **Google’s Gemini API** or **OpenAI's API** or similar - would assist by:
+- Automatically identifying pantry ingredients and generate recipes based on those items
+- Suggest substitutes for missing ingredients or show where they can be bought. 
+
+### Optional Add-ons
+- OpenFoodFacts API to look up product names/images from barcodes
+- Spoonacular API for getting recipe/nutritional information
+- Twilio/SendGrid to send SMS/Email alerts when food is going to expire
+- GoogleMaps API to show location of grocery stores
