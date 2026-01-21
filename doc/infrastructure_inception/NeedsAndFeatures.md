@@ -15,17 +15,29 @@
 11. Need \- User Roles (user/moderator/admin)
 
 
-## List of Features
+## List of Features (with priority)
 
-1. Feature \- Leaderboard of the worst infrastructure damage pics  
-2. Feature \- Leaderboard of highest “point” carriers  
-3. Feature \- Sharing to social media  
-4. Feature \- Naming system for Infrastructure issues  
-5. Feature \- “Upvote” system for existing issues  
-6. Feature \- Celebration when infrastructure issue is resolved  
-7. Feature \- Connect road cams to view roads/potholes in real time  
-8. Feature \- GeoGuess for potholes/damage. People upload pics and other people guess where it came from.  
-9. Feature \- Taking bets on how long it will take the city to fix it using virtual points gathered from using the app \- similar to channel points on Twitch.
+### Core Reporting & Discovery
+1. Submitting an infrastructure issue (photo, location, description) — High  
+2. Feed of latest reported infrastructure issues — Medium  
+3. Maps screen showing infrastructure issues near the user — Medium  
+4. Connect road cameras to view roads/potholes in real time — Low  
+
+### Community & Validation
+5. Upvote / verification system for existing issues — High  
+6. Naming system for reported infrastructure issues — High  
+7. Celebration or visual indicator when an infrastructure issue is resolved — Low  
+8. Flagging system for inappropriate or false posts — Medium  
+
+### User Accounts & Roles
+9. User accounts with authentication — High  
+10. User roles (e.g., reporter, moderator, administrator) — High  
+11. User dashboard showing activity and contributions — Low  
+
+### Gamification & Social
+12. Leaderboard of users with highest contribution points — Medium  
+13. Leaderboard of worst infrastructure damage photos — Low  
+14. Sharing infrastructure issues to social media — Low  
 
 ## What can a user do with it?
 
