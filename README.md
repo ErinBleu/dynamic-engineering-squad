@@ -7,8 +7,8 @@ Refactoring the Future
 <!-- omit in toc -->
 ## Table of Contents
 - [Team Materials](#team-materials)
-- [Project Ideas](#project-ideas)
 - [Meeting Times](#meeting-times)
+- [Infrastructure Project Idea](#infrastructure-project-idea)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Features](#features)
@@ -26,9 +26,14 @@ Refactoring the Future
 - Thursday, flex (as needed)
 - Friday, flex (as needed)
 
-## Project Ideas
+## Infrastructure Project Idea
 
-Here are our [project ideas](doc/ProjectIdeas.pdf).
+- [Vision Statement](./doc/infrastructure_inception/InfrastructureVisionStatement.md)
+- [Mind Map](./doc/infrastructure_inception/InfrastructureAppMindMap.md)
+     - [Visualization](./doc/infrastructure_inception/infrastructure_mind_map.svg)
+- [Needs and Features](./doc/infrastructure_inception/NeedsAndFeatures.md)
+- [Architecture Map](./doc/infrastructure_inception/architecture.svg)
+- [Stakeholders and Users](./doc/infrastructure_inception/stakeholders.md)
 
 ## Installation
 
