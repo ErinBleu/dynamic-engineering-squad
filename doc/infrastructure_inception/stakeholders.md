@@ -32,7 +32,7 @@
 - **Profile Picture**:
      - ![An image of Kyle Glass](./images/kyle_glass.jpg)
 
-### User #2: <Jimothy Slimm>
+### User #2: Jimothy Slimm
 - **Age**: 45
 - **Occupation**: Auto Repair Shop Owner
 - **Location**: Independence, Oregon
