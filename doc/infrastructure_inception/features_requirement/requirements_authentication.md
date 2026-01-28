@@ -59,7 +59,7 @@ Constraints & Bounds:
     * `RoleId`: GUID (FK)
 
 **Relationships:**
-* **User to Role:** Many-to-Many (A user *could* theoretically have multiple roles, though typically just one primary role).
+* **User to Role:** Many-to-One (User can  only have one role, but a role can have many users)
 * **User to Report:** One-to-Many (One User submits many Reports).
 
 ## Analysis of the Design
