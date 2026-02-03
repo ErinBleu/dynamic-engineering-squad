@@ -6,7 +6,7 @@ namespace InfrastructureApp.Services;
 public class LeaderboardRepositoryInMemory : ILeaderboardRepository
 {
     //Keyed by DisplayName (case-insensitive)
-    ProviderAliasAttribute readonly ConcurrentDictionary<string, LeaderboardEntry> _entries = 
+    private readonly ConcurrentDictionary<string, LeaderboardEntry> _entries = 
         new(StringComparer.OrdinalIgnoreCase);
 
         //Lock Protects multi-step updates (read-modify-write)
