@@ -66,7 +66,7 @@ namespace InfrastructureApp.Data
             builder.Entity<ReportIssue>(entity =>
             {
                 // Map to existing SQL table
-                entity.ToTable("Report");
+                entity.ToTable("Reports");
 
                 // Primary key
                 entity.HasKey(r => r.Id);
