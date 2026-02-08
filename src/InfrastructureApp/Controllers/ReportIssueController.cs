@@ -40,31 +40,102 @@ namespace InfrastructureApp.Controllers
 
 
         [HttpPost]
-        [AllowAnonymous]
+        [AllowAnonymous] // testing; later switch to [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ReportIssueViewModel vm)
         {
             if (!ModelState.IsValid)
                 return View(vm);
 
-            // TEMP: use seeded test user
-            var report = new ReportIssue
+            const int pointsForReport = 10;
+
+            // TEST: use seeded user (palter)
+            var userId = "user-guid-001";
+
+            // Keep report + points consistent
+            await using var tx = await _db.Database.BeginTransactionAsync();
+
+            try
             {
-                Description = vm.Description,
-                Latitude = vm.Latitude,
-                Longitude = vm.Longitude,
-                ImageUrl = vm.ImageUrl,
-                Status = "Pending",
-                CreatedAt = DateTime.UtcNow,
-                UserId = "user-guid-001" // palter test user
-            };
+                // 1) Save the report
+                var report = new ReportIssue
+                {
+                    Description = vm.Description,
+                    Latitude = vm.Latitude,
+                    Longitude = vm.Longitude,
+                    ImageUrl = string.IsNullOrWhiteSpace(vm.ImageUrl) ? null : vm.ImageUrl.Trim(),
+                    Status = "Pending",
+                    CreatedAt = DateTime.UtcNow,
+                    UserId = userId
+                };
 
-            _db.ReportIssue.Add(report);
-            await _db.SaveChangesAsync();
+                _db.ReportIssue.Add(report);
+                await _db.SaveChangesAsync(); // report.Id is now generated
 
-            TempData["Success"] = "Report submitted!";    
-            return RedirectToAction(nameof(Details), new {id = report.Id});
+                // 2) Update/create UserPoints for THIS SAME userId
+                var userPoints = await _db.UserPoints
+                    .FirstOrDefaultAsync(up => up.UserId == userId);
+
+                if (userPoints == null)
+                {
+                    userPoints = new UserPoints
+                    {
+                        UserId = userId,
+                        CurrentPoints = 0,
+                        LifetimePoints = 0,
+                        LastUpdated = DateTime.UtcNow
+                    };
+
+                    _db.UserPoints.Add(userPoints);
+                }
+
+                userPoints.CurrentPoints += pointsForReport;
+                userPoints.LifetimePoints += pointsForReport;
+                userPoints.LastUpdated = DateTime.UtcNow;
+
+                await _db.SaveChangesAsync();
+
+                await tx.CommitAsync();
+
+                TempData["Success"] = $"Report submitted! +{pointsForReport} points awarded.";
+                return RedirectToAction(nameof(Details), new { id = report.Id });
+            }
+            catch
+            {
+                await tx.RollbackAsync();
+                ModelState.AddModelError("", "Something went wrong saving your report. Please try again.");
+                return View(vm);
+            }
         }
+
+
+
+        // [HttpPost]
+        // [AllowAnonymous]
+        // [ValidateAntiForgeryToken]
+        // public async Task<IActionResult> Create(ReportIssueViewModel vm)
+        // {
+        //     if (!ModelState.IsValid)
+        //         return View(vm);
+
+        //     // TEMP: use seeded test user
+        //     var report = new ReportIssue
+        //     {
+        //         Description = vm.Description,
+        //         Latitude = vm.Latitude,
+        //         Longitude = vm.Longitude,
+        //         ImageUrl = vm.ImageUrl,
+        //         Status = "Pending",
+        //         CreatedAt = DateTime.UtcNow,
+        //         UserId = "user-guid-001" // palter test user
+        //     };
+
+        //     _db.ReportIssue.Add(report);
+        //     await _db.SaveChangesAsync();
+
+        //     TempData["Success"] = "Report submitted!";    
+        //     return RedirectToAction(nameof(Details), new {id = report.Id});
+        // }
 
 
 
