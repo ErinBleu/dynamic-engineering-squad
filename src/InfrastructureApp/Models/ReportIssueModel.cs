@@ -7,7 +7,7 @@ namespace InfrastructureApp.Models
     public class ReportIssue
     {
         //PK Identity
-        public int ID {get; set;}
+        public int Id {get; set;}
 
         //NVARCHAR(MAX)
         [Required]
