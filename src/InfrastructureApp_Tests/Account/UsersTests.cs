@@ -37,5 +37,5 @@ public class UsersTests
         
         Assert.That(usersModel.NormalizedEmail, Is.EqualTo(email.ToUpper()));
         Assert.That(usersModel.Email, Is.EqualTo(email));
-    }
+    } 
 }
