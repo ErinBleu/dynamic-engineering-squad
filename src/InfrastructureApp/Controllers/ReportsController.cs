@@ -10,7 +10,6 @@ namespace InfrastructureApp.Controllers
     {
         private readonly ApplicationDbContext _db; // Database (EF Core) access
 
-        // Constructor injects the database to query data
         public ReportsController(ApplicationDbContext db)
         {
             _db = db;
@@ -21,9 +20,18 @@ namespace InfrastructureApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Latest()
         {
-            
-            // Use existing database reports (no seeding needed) and map them to ViewModels
-            var items = await _db.ReportIssue
+            // Show approved reports by default; some roles can see everything
+            bool isAdmin = User.IsInRole("Admin");
+
+            var query = _db.ReportIssue.AsQueryable();
+
+            if (!isAdmin)
+            {
+                query = query.Where(r => r.Status == "Approved");
+            }
+
+            // Map to ViewModels
+            var items = await query
                 .OrderByDescending(r => r.CreatedAt)
                 .Select(r => new LatestReportItemViewModel
                 {
