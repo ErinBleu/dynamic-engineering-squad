@@ -18,8 +18,8 @@ namespace InfrastructureApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Latest()
         {
-            // If the ReportIssue table/entity exists already, use it.
-            // Otherwise, use placeholder data (see the fallback below).
+            // Since it has a database/entity already exist
+            // for the report issue then use it if it works
 
             var items = await _db.ReportIssue
                 .OrderByDescending(r => r.CreatedAt)   // most recent first
