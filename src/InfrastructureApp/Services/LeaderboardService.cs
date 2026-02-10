@@ -30,7 +30,7 @@ public class LeaderboardService
 
     //Returns top 25 entries
     //Deterministic sorting to avoid ties or random order
-    public async Task<IReadOnlyList<LeaderboardEntry>> GetTopAsync(int n = 25)
+    public virtual async Task<IReadOnlyList<LeaderboardEntry>> GetTopAsync(int n = 25)
     {
 
         //If an invalid or nagative value is supplied, fall back to the default
