@@ -1,46 +1,40 @@
-using InfrastructureApp.Data;
+using InfrastructureApp.Services;
 using InfrastructureApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace InfrastructureApp.Controllers
 {
-    // Controller handles requests related to reports pages
+    // Controller handles requests for Reports pages
     public class ReportsController : Controller
     {
-        private readonly ApplicationDbContext _db; // Database (EF Core) access
+        // Repository handles all database logic 
+        private readonly IReportIssueRepository _repo;
 
-        public ReportsController(ApplicationDbContext db)
+        // Inject repository through constructor (Dependency Injection)
+        public ReportsController(IReportIssueRepository repo)
         {
-            _db = db;
+            _repo = repo;
         }
 
         // GET: /Reports/Latest
-        // Shows the Latest Reports page
         [HttpGet]
         public async Task<IActionResult> Latest()
         {
-            // Show approved reports by default; some roles can see everything
+            // Latest page shows approved reports by default; admins can see all
             bool isAdmin = User.IsInRole("Admin");
 
-            var query = _db.ReportIssue.AsQueryable();
+            // Repository handles database + filtering logic (not the controller)
+            // Repository applies the filtering and gets the correct reports
+            var reports = await _repo.GetLatestAsync(isAdmin);
 
-            if (!isAdmin)
+            // Convert domain models → ViewModels for the UI
+            var items = reports.Select(r => new LatestReportItemViewModel
             {
-                query = query.Where(r => r.Status == "Approved");
-            }
-
-            // Map to ViewModels
-            var items = await query
-                .OrderByDescending(r => r.CreatedAt)
-                .Select(r => new LatestReportItemViewModel
-                {
-                    Id = r.Id,
-                    Description = r.Description,
-                    Status = r.Status,
-                    CreatedAt = r.CreatedAt
-                })
-                .ToListAsync();
+                Id = r.Id,
+                Description = r.Description,
+                Status = r.Status,
+                CreatedAt = r.CreatedAt
+            }).ToList();
 
             // Put list into page ViewModel
             var vm = new LatestReportsViewModel
@@ -48,8 +42,10 @@ namespace InfrastructureApp.Controllers
                 Reports = items
             };
 
-            // Send data to the view (Razor page)
+            // Send data to the view (Razor Page)
             return View(vm);
         }
     }
 }
+
+
