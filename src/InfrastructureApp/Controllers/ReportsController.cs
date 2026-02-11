@@ -23,8 +23,7 @@ namespace InfrastructureApp.Controllers
             // Latest page shows approved reports by default; admins can see all
             bool isAdmin = User.IsInRole("Admin");
 
-            // Repository handles database + filtering logic (not the controller)
-            // Repository applies the filtering and gets the correct reports
+            // Delegate database access and filtering to the repository to keep the controller thin (separation of concerns)
             var reports = await _repo.GetLatestAsync(isAdmin);
 
             // Convert domain models → ViewModels for the UI
