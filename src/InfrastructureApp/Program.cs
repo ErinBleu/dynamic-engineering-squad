@@ -36,7 +36,8 @@ builder.Services.AddIdentity<Users, IdentityRole>(options =>
 builder.Services.AddScoped<ILeaderboardRepository, LeaderboardRepositoryEf>();
 builder.Services.AddScoped<LeaderboardService>();
 
-
+// Added Repository ID (Dependency Injection) for ReportIssueRepositoryEf
+builder.Services.AddScoped<IReportIssueRepository, ReportIssueRepositoryEf>();
 
 
 var app = builder.Build();
