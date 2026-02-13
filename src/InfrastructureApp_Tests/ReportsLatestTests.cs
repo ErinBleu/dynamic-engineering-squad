@@ -66,12 +66,14 @@ namespace InfrastructureApp_Tests
 
         // -------------------------------------------------------
         // TEST 3: Newest-first sorting logic
+        // Reports must be ordered newest-first.
         // Uses the model helper: ReportIssue.OrderLatestFirst(...)
+        // This ensures the Latest page shows most recent reports first.
         // -------------------------------------------------------
         [Test]
         public void OrderLatestFirst_OrdersByCreatedAtDescending()
         {
-            // Arrange
+            // Arrange: create two reports with different dates
             var older = new ReportIssue { CreatedAt = new DateTime(2026, 1, 1) };
             var newer = new ReportIssue { CreatedAt = new DateTime(2026, 2, 1) };
 
