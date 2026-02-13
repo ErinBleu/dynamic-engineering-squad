@@ -8,15 +8,14 @@ using System.Linq;
 namespace InfrastructureApp_Tests
 {
     // Tests for the "Latest Reports" feature logic.
-    // Sprint 1 rule: unit test C# logic in models/repositories/view-models (not UI).
+    // Sprint 1 - unit test C# logic in models/repositories/view-models (not UI).
     public class ReportsLatestTests
     {
-         // This runs before every test method
-        // Useful later if shared test setup is needed
+
         [SetUp]
         public void Setup()
         {
-            // No shared setup required
+            // No shared setup 
         }
 
         // -------------------------------------------------------
