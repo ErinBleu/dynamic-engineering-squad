@@ -7,28 +7,36 @@ namespace InfrastructureApp.Services
 {
     public class DashboardRepositoryEf : IDashboardRepository
     {
-        private readonly ApplicationDbContext _db;
+        
+        private readonly ApplicationDbContext _db; // Database context used for queries
 
         public DashboardRepositoryEf(ApplicationDbContext db)
         {
             _db = db;
         }
 
-        public async Task<DashboardViewModel> GetDashboardSummaryAsync()
+
+        // Attempt to load a seeded/demo user from the database.
+        // If none exists, return placeholder values so the dashboard
+        // remains functional until full account integration is enabled.
+        public async Task<DashboardViewModel> GetDashboardSummaryAsync() // Builds the dashboard summary for the current user
         {
-            // Load a demo/seeded user if one exists.
+            
             var user = await _db.Users
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
 
+            // If no user exists, return default placeholder values
             if (user == null)
             {
                 return BuildPlaceholderDashboard();
             }
 
+            // Otherwise build dashboard using real data
             return await BuildDashboardForUserAsync(user);
         }
 
+        // Returns default dashboard values when no user is found
         private static DashboardViewModel BuildPlaceholderDashboard()
         {
             return new DashboardViewModel
@@ -40,14 +48,15 @@ namespace InfrastructureApp.Services
             };
         }
 
+        // Builds dashboard values using database data
         private async Task<DashboardViewModel> BuildDashboardForUserAsync(Users user)
         {
-            // Count reports submitted by this user
+            // Count how many reports this user submitted
             var reportsSubmitted = await _db.ReportIssue
                 .AsNoTracking()
                 .CountAsync(r => r.UserId == user.Id);
 
-            // Load points if they exist
+            // Get user points (if they exist)
             var pointsRow = await _db.UserPoints
                 .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.UserId == user.Id);
