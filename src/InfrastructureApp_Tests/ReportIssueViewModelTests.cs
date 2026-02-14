@@ -113,7 +113,7 @@ public class ReportIssueViewModelTests
             r.ErrorMessage.Contains("Please upload a photo of the damage.")));
     }
 
-    //test a photo was provided
+    //test whether a photo was provided
     [Test]
     public void Photo_WhenProvided_Passes()
     {
