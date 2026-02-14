@@ -8,6 +8,7 @@ namespace InfrastructureApp.ViewModels
     {
         [Required(ErrorMessage = "Please enter a description.")]
         [Display(Name = "Description")]
+        [MaxLength(300, ErrorMessage = "Description must be 300 characters or less.")]
         public string Description { get; set; } = "";
 
         //replaced URL with photo upload
