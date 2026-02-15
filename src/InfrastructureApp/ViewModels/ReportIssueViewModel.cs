@@ -1,3 +1,7 @@
+/* This file defines the ViewModel used when a user submits an infrastructure report through the form.
+It is specifically designed for the UI layer (the form), not for the database. Represents the data a form sends to the server.
+Is separate from the database model.*/
+
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 
