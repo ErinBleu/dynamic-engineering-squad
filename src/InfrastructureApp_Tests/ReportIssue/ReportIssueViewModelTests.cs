@@ -10,6 +10,8 @@ namespace InfrastructureApp_Tests.ViewModels;
 [TestFixture]
 public class ReportIssueViewModelTests
 {
+    //Creates a list to hold validation errors, checks the object against its DataAnnotations.
+    //it validates every property, not just “Required” on the object. Returns the list of validation results (empty list = passes).
     private static IList<ValidationResult> Validate(object model)
     {
         var results = new List<ValidationResult>();
@@ -117,6 +119,7 @@ public class ReportIssueViewModelTests
     [Test]
     public void Photo_WhenProvided_Passes()
     {
+        //build fake uploaded file to test
         var bytes = new byte[] { 1, 2, 3 };
         using var stream = new MemoryStream(bytes);
 
@@ -126,6 +129,7 @@ public class ReportIssueViewModelTests
             ContentType = "image/jpeg"
         };
 
+        //tests that fake file
         var vm = new ReportIssueViewModel
         {
             Description = "Valid",

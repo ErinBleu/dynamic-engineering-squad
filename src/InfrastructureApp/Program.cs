@@ -38,6 +38,7 @@ builder.Services.AddIdentity<Users, IdentityRole>(options =>
 builder.Services.AddScoped<ILeaderboardRepository, LeaderboardRepositoryEf>();
 builder.Services.AddScoped<LeaderboardService>();
 
+//dependency injection configuration. They tell the application what concrete classes to use whenever an interface is requested.
 builder.Services.AddScoped<IReportIssueRepository, ReportIssueRepositoryEf>();
 builder.Services.AddScoped<IReportIssueService, ReportIssueService>();
 
