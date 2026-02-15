@@ -37,7 +37,8 @@ builder.Services.AddIdentity<Users, IdentityRole>(options =>
 builder.Services.AddScoped<ILeaderboardRepository, LeaderboardRepositoryEf>();
 builder.Services.AddScoped<LeaderboardService>();
 
-// Added Repository ID (Dependency Injection) for ReportIssueRepositoryEf
+// Added Repository DI (Dependency Injection) for ReportIssueRepositoryEf
+//dependency injection configuration. They tell the application what concrete classes to use whenever an interface is requested.
 builder.Services.AddScoped<IReportIssueRepository, ReportIssueRepositoryEf>();
 builder.Services.AddScoped<IReportIssueService, ReportIssueService>();
 
