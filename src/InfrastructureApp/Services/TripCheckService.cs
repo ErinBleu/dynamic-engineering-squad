@@ -12,12 +12,14 @@ namespace InfrastructureApp.Services
 {
     public class TripCheckService : ITripCheckService
     {
-        private const string CameraCacheKey = "TripCheck:Cameras";
-
+        // dependencies injected by ASP.NET
         private readonly HttpClient _http;
         private readonly IMemoryCache _cache;
         private readonly ILogger<TripCheckService> _logger;
         private readonly TripCheckOptions _options;
+
+        // unique cache key per service instance (important for tests)
+        private readonly string _cameraCacheKey;
 
         public TripCheckService(
             HttpClient http,
@@ -29,17 +31,21 @@ namespace InfrastructureApp.Services
             _cache = cache;
             _logger = logger;
             _options = options;
+
+            // Each instance gets its own cache slot
+            _cameraCacheKey = $"TripCheck:Cameras:{Guid.NewGuid()}";
         }
 
         public async Task<IReadOnlyList<RoadCameraViewModel>> GetCamerasAsync()
         {
             // 1) Try cache first
-            if (_cache.TryGetValue(CameraCacheKey, out List<RoadCameraViewModel>? cached))
+            if (_cache.TryGetValue(_cameraCacheKey, out List<RoadCameraViewModel>? cached))
                 return cached!;
 
             try
             {
-                var response = await _http.GetAsync("https://tripcheck.com/Roadway/api/v1/cameras");
+                // Call TripCheck API (relative URL so tests can mock it)
+                var response = await _http.GetAsync("Roadway/api/v1/cameras");
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -49,7 +55,7 @@ namespace InfrastructureApp.Services
 
                 var json = await response.Content.ReadAsStringAsync();
 
-                // IMPORTANT: TripCheck returns a JSON ARRAY
+                // TripCheck returns a JSON ARRAY
                 var cameras = JsonSerializer.Deserialize<List<TripCheckCameraDto>>(json,
                     new JsonSerializerOptions
                     {
@@ -61,8 +67,8 @@ namespace InfrastructureApp.Services
                     .ToList()
                     ?? new List<RoadCameraViewModel>();
 
-                // Cache result
-                _cache.Set(CameraCacheKey, mapped, TimeSpan.FromMinutes(_options.CacheMinutes));
+                // store in cache
+                _cache.Set(_cameraCacheKey, mapped, TimeSpan.FromMinutes(_options.CacheMinutes));
 
                 return mapped;
             }
@@ -101,21 +107,15 @@ namespace InfrastructureApp.Services
         }
 
         /// <summary>
-        /// DTO matches TripCheck JSON exactly.
-        /// We isolate it here so API changes don't break UI.
+        /// DTO that matches TripCheck JSON
         /// </summary>
         private class TripCheckCameraDto
         {
             public string? Id { get; set; }
-
             public string? Name { get; set; }
-
             public double Latitude { get; set; }
-
             public double Longitude { get; set; }
-
             public string? ImageUrl { get; set; }
-
             public string? LastUpdated { get; set; }
         }
     }

@@ -47,12 +47,17 @@ builder.Services.AddScoped<IDashboardRepository, DashboardRepositoryEf>();
 
 builder.Services.AddMemoryCache();
 
-builder.Services.AddHttpClient<ITripCheckService, TripCheckService>();
-
-builder.Services.AddScoped(new TripCheckOptions
+builder.Services.AddSingleton(new TripCheckOptions
 {
     CacheMinutes = 10
 });
+
+builder.Services.AddHttpClient<ITripCheckService, TripCheckService>(client =>
+{
+    client.BaseAddress = new Uri("https://tripcheck.com/");
+});
+
+
 
 var app = builder.Build();
 
