@@ -14,7 +14,7 @@ namespace InfrastructureApp.Controllers
             this.userManager = userManager;
         }
 
-        public IActionResult Index()
+        public IActionResult Login()
         {
             return View();
         }
