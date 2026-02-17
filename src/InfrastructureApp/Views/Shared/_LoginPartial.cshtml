@@ -14,5 +14,15 @@
             </form>
         </li>
     }
-
+    else
+    {
+        <li class="nav-item d-flex align-items-center">
+            <a class="nav-link text-light" asp-controller="Account" asp-action="Login">
+                Login
+            </a>
+            <a class="nav-link text-light" asp-controller="Account" asp-action="Register">
+                Register
+            </a>
+        </li>
+    }
 </ul>
