@@ -45,6 +45,14 @@ builder.Services.AddScoped<IReportIssueService, ReportIssueService>();
 // Added Repository ID (Dependency Injection) for Dashboardrepo
 builder.Services.AddScoped<IDashboardRepository, DashboardRepositoryEf>();
 
+builder.Services.AddMemoryCache();
+
+builder.Services.AddHttpClient<ITripCheckService, TripCheckService>();
+
+builder.Services.AddScoped(new TripCheckOptions
+{
+    CacheMinutes = 10
+});
 
 var app = builder.Build();
 
